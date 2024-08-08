@@ -13,6 +13,8 @@ public class Stopwatch : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = false;
+
         rb = GetComponent<Rigidbody>();
         if (timeText == null)
         {
