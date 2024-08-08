@@ -2906,7 +2906,7 @@ MonoBehaviour:
   roadPrefab: {fileID: 2129626784}
   player: {fileID: 1910567874}
   roadLength: 210
-  initialRoadSegments: 5
+  roadSegmentsAhead: 3
   spawnDistance: 20
 --- !u!4 &1018759568
 Transform:
