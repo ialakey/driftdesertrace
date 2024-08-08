@@ -9,6 +9,7 @@ public class MenuMain : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = true;
         startButton.onClick.AddListener(StartGame);
         quitButton.onClick.AddListener(QuitGame);
     }
