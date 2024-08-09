@@ -6,45 +6,69 @@ public class GenerateRoad : MonoBehaviour
 {
     public GameObject roadPrefab; // Префаб сегмента дороги
     public Transform player; // Ссылка на объект игрока или камеры
-    public int roadLength = 210; // Длина одного сегмента дороги
-    public int roadSegmentsAhead = 3; // Количество сегментов впереди игрока
-    public float spawnDistance = 10.0f; // Расстояние, на котором генерируются новые сегменты
+    public int initialSegments = 3; // Количество сегментов, генерируемых при старте
+    public int maxSegments = 6; // Максимальное количество сегментов на сцене
 
     private List<GameObject> roadSegments = new List<GameObject>();
-    private Vector3 nextSpawnPosition;
+    private float segmentLength; // Длина одного сегмента дороги
 
     void Start()
     {
-        nextSpawnPosition = Vector3.zero;
-
-        for (int i = 0; i < roadSegmentsAhead; i++)
+        // Попытка найти Renderer на префабе или его дочерних объектах
+        Renderer roadRenderer = roadPrefab.GetComponentInChildren<Renderer>();
+        if (roadRenderer != null)
         {
-            SpawnRoadSegment();
+            segmentLength = roadRenderer.bounds.size.z;
+        }
+        else
+        {
+            Debug.LogError("Не удалось найти компонент Renderer на префабе дороги. Убедитесь, что roadPrefab содержит Renderer или задайте длину сегмента вручную.");
+            segmentLength = 210.0f; // Задайте это значение вручную, если вы точно знаете длину сегмента.
+        }
+
+        // Генерация начальных сегментов
+        for (int i = -initialSegments / 2; i < initialSegments / 2; i++)
+        {
+            Vector3 spawnPosition = new Vector3(0, 0, i * segmentLength);
+            SpawnRoadSegment(spawnPosition);
         }
     }
 
     void Update()
     {
-        if (Vector3.Distance(player.position, roadSegments[1].transform.position) < spawnDistance)
-        {
-            SpawnRoadSegment();
+        if (roadSegments.Count == 0)
+            return;
 
-            RemoveOldestSegment();
+        if (player.position.z > roadSegments[roadSegments.Count - 1].transform.position.z - segmentLength)
+        {
+            SpawnRoadSegment(roadSegments[roadSegments.Count - 1].transform.position + new Vector3(0, 0, segmentLength));
+            RemoveOldestSegment(false);
+        }
+
+        if (player.position.z < roadSegments[0].transform.position.z + segmentLength)
+        {
+            SpawnRoadSegment(roadSegments[0].transform.position - new Vector3(0, 0, segmentLength));
+            RemoveOldestSegment(true);
         }
     }
 
-    void SpawnRoadSegment()
+    void SpawnRoadSegment(Vector3 position)
     {
-        GameObject newSegment = Instantiate(roadPrefab, nextSpawnPosition, Quaternion.identity);
-
+        GameObject newSegment = Instantiate(roadPrefab, position, Quaternion.identity);
         roadSegments.Add(newSegment);
-
-        nextSpawnPosition += new Vector3(0, 0, roadLength);
     }
 
-    void RemoveOldestSegment()
+    void RemoveOldestSegment(bool fromFront)
     {
-        Destroy(roadSegments[0]);
-        roadSegments.RemoveAt(0);
+        if (fromFront && roadSegments.Count > 0)
+        {
+            Destroy(roadSegments[0]);
+            roadSegments.RemoveAt(0);
+        }
+        else if (!fromFront && roadSegments.Count > 0)
+        {
+            Destroy(roadSegments[roadSegments.Count - 1]);
+            roadSegments.RemoveAt(roadSegments.Count - 1);
+        }
     }
 }

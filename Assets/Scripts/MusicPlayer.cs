@@ -49,7 +49,7 @@ public class MusicPlayer : MonoBehaviour
         {
             audioSource.Pause();
             isPaused = true;
-            trackInfoText.text = "Music is paused. Press P to continue.";
+            trackInfoText.text = "Music is paused. \n Press P to continue.";
         }
         else
         {
@@ -63,11 +63,13 @@ public class MusicPlayer : MonoBehaviour
     {
         if (isPaused)
         {
-            trackInfoText.text = "Music is paused. Press P to continue.";
+            trackInfoText.text = "Music is paused. \n Press P to continue.";
         }
         else
         {
-            trackInfoText.text = "G - next track. Now playing: " + tracks[currentTrackIndex].name;
+            string trackName = tracks[currentTrackIndex].name;
+            string shortenedTrackName = trackName.Substring(0, Mathf.Min(6, trackName.Length));
+            trackInfoText.text = "G - next track. \n Now playing: " + shortenedTrackName;
         }
     }
 }

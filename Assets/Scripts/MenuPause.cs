@@ -4,15 +4,15 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject pauseMenuPanel;  
-    public Button resumeButton;        
-    public Button quitButton;          
+    public GameObject pauseMenuPanel;
+    public Button resumeButton;
+    public Button quitButton;
 
     private bool isPaused = false;
 
     void Start()
     {
-        pauseMenuPanel.SetActive(false); 
+        pauseMenuPanel.SetActive(false);
 
         resumeButton.onClick.AddListener(ResumeGame);
         quitButton.onClick.AddListener(QuitGame);
@@ -35,22 +35,38 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
-        pauseMenuPanel.SetActive(true);  
-        Time.timeScale = 0f;            
+        pauseMenuPanel.SetActive(true);
+        Time.timeScale = 0f;
         isPaused = true;
+
+        AudioSource[] allAudioSources = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource audioSource in allAudioSources)
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Pause();
+            }
+        }
+        Cursor.visible = true;
     }
 
     public void ResumeGame()
     {
-        SceneManager.LoadScene(0);
-        pauseMenuPanel.SetActive(false); 
-        Time.timeScale = 1f;             
+        pauseMenuPanel.SetActive(false);
+        Time.timeScale = 1f;
         isPaused = false;
+
+        AudioSource[] allAudioSources = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource audioSource in allAudioSources)
+        {
+            audioSource.UnPause();
+        }
+        Cursor.visible = false;
     }
 
     public void QuitGame()
     {
-        Time.timeScale = 1f; 
-        SceneManager.LoadScene("Menu"); 
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
     }
 }
