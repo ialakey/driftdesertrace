@@ -40,15 +40,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenuPanel.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
-
-        AudioSource[] allAudioSources = FindObjectsOfType<AudioSource>();
-        foreach (AudioSource audioSource in allAudioSources)
-        {
-            if (audioSource.isPlaying)
-            {
-                audioSource.Pause();
-            }
-        }
         Cursor.visible = true;
     }
 
@@ -57,12 +48,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenuPanel.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
-
-        AudioSource[] allAudioSources = FindObjectsOfType<AudioSource>();
-        foreach (AudioSource audioSource in allAudioSources)
-        {
-            audioSource.UnPause();
-        }
         Cursor.visible = false;
     }
 
