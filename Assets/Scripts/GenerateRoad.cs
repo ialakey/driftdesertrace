@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +13,6 @@ public class GenerateRoad : MonoBehaviour
 
     void Start()
     {
-        // Попытка найти Renderer на префабе или его дочерних объектах
         Renderer roadRenderer = roadPrefab.GetComponentInChildren<Renderer>();
         if (roadRenderer != null)
         {
@@ -23,10 +21,9 @@ public class GenerateRoad : MonoBehaviour
         else
         {
             Debug.LogError("Не удалось найти компонент Renderer на префабе дороги. Убедитесь, что roadPrefab содержит Renderer или задайте длину сегмента вручную.");
-            segmentLength = 210.0f; // Задайте это значение вручную, если вы точно знаете длину сегмента.
+            segmentLength = 210.0f;
         }
 
-        // Генерация начальных сегментов
         for (int i = -initialSegments / 2; i < initialSegments / 2; i++)
         {
             Vector3 spawnPosition = new Vector3(0, 0, i * segmentLength);

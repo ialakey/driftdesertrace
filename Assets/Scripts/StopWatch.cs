@@ -1,21 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
+
 public class Stopwatch : MonoBehaviour
 {
-    public Text timeText; 
-    public float gameDuration = 60f; 
+    public Text timeText;
+    public float gameDuration = 28800f;
 
     private float elapsedTime = 0f;
-    private bool isMoving = false;
-
-    private Rigidbody rb;
 
     private void Start()
     {
         Cursor.visible = false;
 
-        rb = GetComponent<Rigidbody>();
         if (timeText == null)
         {
             Debug.LogError("TimeText is not assigned.");
@@ -24,20 +21,8 @@ public class Stopwatch : MonoBehaviour
 
     private void Update()
     {
-        if (rb != null && rb.velocity.magnitude > 0.1f)
-        {
-            isMoving = true;
-        }
-        else
-        {
-            isMoving = false;
-        }
-
-        if (isMoving)
-        {
-            elapsedTime += Time.deltaTime;
-            UpdateTimeText();
-        }
+        elapsedTime += Time.deltaTime;
+        UpdateTimeText();
 
         if (elapsedTime >= gameDuration)
         {
@@ -47,20 +32,41 @@ public class Stopwatch : MonoBehaviour
 
     private void UpdateTimeText()
     {
-        int elapsedMinutes = Mathf.FloorToInt(elapsedTime / 60f);
+        int elapsedHours = Mathf.FloorToInt(elapsedTime / 3600f);
+        int elapsedMinutes = Mathf.FloorToInt((elapsedTime % 3600f) / 60f);
         int elapsedSeconds = Mathf.FloorToInt(elapsedTime % 60f);
+
         float remainingTime = Mathf.Max(gameDuration - elapsedTime, 0f);
-        int remainingMinutes = Mathf.FloorToInt(remainingTime / 60f);
+        int remainingHours = Mathf.FloorToInt(remainingTime / 3600f);
+        int remainingMinutes = Mathf.FloorToInt((remainingTime % 3600f) / 60f);
         int remainingSeconds = Mathf.FloorToInt(remainingTime % 60f);
 
-        timeText.text = string.Format("Elapsed: {0:D2}:{1:D2}\nRemaining: {2:D2}:{3:D2}",
-            elapsedMinutes, elapsedSeconds, remainingMinutes, remainingSeconds);
+        string elapsedText;
+        string remainingText;
+
+        if (elapsedHours > 0)
+        {
+            elapsedText = string.Format("{0:D2}H:{1:D2}M", elapsedHours, elapsedMinutes);
+        }
+        else
+        {
+            elapsedText = string.Format("{0:D2}M:{1:D2}S", elapsedMinutes, elapsedSeconds);
+        }
+
+        if (remainingHours > 0)
+        {
+            remainingText = string.Format("{0:D2}H:{1:D2}M", remainingHours, remainingMinutes);
+        }
+        else
+        {
+            remainingText = string.Format("{0:D2}M:{1:D2}S", remainingMinutes, remainingSeconds);
+        }
+
+        timeText.text = string.Format("Elapsed: {0}\nRemaining: {1}", elapsedText, remainingText);
     }
 
     private void EndGame()
     {
-        Debug.Log("Game Over!");
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Menu");
     }
 }

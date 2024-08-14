@@ -12,19 +12,24 @@ public class MusicPlayer : MonoBehaviour
     void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.loop = true;  
+        audioSource.loop = true;
+
+        foreach (var track in tracks)
+        {
+            track.LoadAudioData();
+        }
 
         if (tracks.Length > 0)
         {
             audioSource.clip = tracks[currentTrackIndex];
             audioSource.Play();
-            UpdateTrackInfo();  
+            UpdateTrackInfo();
         }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.N))
         {
             PlayNextTrack();
         }
@@ -69,7 +74,7 @@ public class MusicPlayer : MonoBehaviour
         {
             string trackName = tracks[currentTrackIndex].name;
             string shortenedTrackName = trackName.Substring(0, Mathf.Min(6, trackName.Length));
-            trackInfoText.text = "G - next track. \n Now playing: " + shortenedTrackName;
+            trackInfoText.text = "N - next track. \n Now playing: " + shortenedTrackName;
         }
     }
 }

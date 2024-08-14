@@ -31,6 +31,10 @@ public class PauseMenu : MonoBehaviour
                 PauseGame();
             }
         }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            RCC.ChangeCamera();
+        }
     }
 
     public void PauseGame()
@@ -67,6 +71,6 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Menu");
     }
 }

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: f71d894eef401f44a937b5635c460a36
   - enabled: 1
-    path: Assets/Scenes/Game.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/RCC City (Car Selection with Load Next Scene).unity
+    guid: 90ae7a5c336d5904287e5df20465a19a
+  - enabled: 1
+    path: Assets/Scenes/RCC City (Car Selection with Loaded Scene).unity
+    guid: 9ed7269e045575c47904e06197618d8b
   m_configObjects: {}
