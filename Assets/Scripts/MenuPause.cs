@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuPanel;
     public Button resumeButton;
+    public Button changeCarButton;
     public Button quitButton;
 
     private bool isPaused = false;
@@ -16,6 +17,7 @@ public class PauseMenu : MonoBehaviour
 
         resumeButton.onClick.AddListener(ResumeGame);
         quitButton.onClick.AddListener(QuitGame);
+        changeCarButton.onClick.AddListener(ChangeCar);
     }
 
     void Update()
@@ -30,10 +32,6 @@ public class PauseMenu : MonoBehaviour
             {
                 PauseGame();
             }
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            RCC.ChangeCamera();
         }
     }
 
@@ -66,6 +64,11 @@ public class PauseMenu : MonoBehaviour
             audioSource.UnPause();
         }
         Cursor.visible = false;
+    }
+
+    public void ChangeCar()
+    {
+        SceneManager.LoadScene("RCC City (Car Selection with Load Next Scene)");
     }
 
     public void QuitGame()
