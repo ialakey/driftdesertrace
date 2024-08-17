@@ -87,7 +87,6 @@ public class Stopwatch : MonoBehaviour
         {
             SteamUserStats.SetAchievement(achievementId);
             SteamUserStats.StoreStats();
-            Debug.Log("Achievement unlocked: " + achievementId);
         }
     }
 
