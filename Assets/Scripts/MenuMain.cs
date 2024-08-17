@@ -12,6 +12,12 @@ public class MenuMain : MonoBehaviour
         Cursor.visible = true;
         startButton.onClick.AddListener(StartGame);
         quitButton.onClick.AddListener(QuitGame);
+
+        if (!SteamManager.Initialized)
+        {
+            Debug.LogError("Steam API не инициализирована");
+            return;
+        }
     }
 
     void StartGame()

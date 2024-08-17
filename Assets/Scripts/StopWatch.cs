@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Steamworks;
 
 public class Stopwatch : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Stopwatch : MonoBehaviour
     public float gameDuration = 28800f;
 
     private float elapsedTime = 0f;
+    private bool[] achievementsUnlocked = new bool[8];
 
     private void Start()
     {
@@ -23,6 +25,8 @@ public class Stopwatch : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
         UpdateTimeText();
+
+        CheckAchievements();
 
         if (elapsedTime >= gameDuration)
         {
@@ -63,6 +67,28 @@ public class Stopwatch : MonoBehaviour
         }
 
         timeText.text = string.Format("Elapsed: {0}\nRemaining: {1}", elapsedText, remainingText);
+    }
+
+    private void CheckAchievements()
+    {
+        for (int i = 1; i <= achievementsUnlocked.Length; i++)
+        {
+            if (!achievementsUnlocked[i - 1] && elapsedTime >= i * 3600f)
+            {
+                UnlockAchievement("PLAY_" + i + "H");
+                achievementsUnlocked[i - 1] = true;
+            }
+        }
+    }
+
+    private void UnlockAchievement(string achievementId)
+    {
+        if (SteamManager.Initialized)
+        {
+            SteamUserStats.SetAchievement(achievementId);
+            SteamUserStats.StoreStats();
+            Debug.Log("Achievement unlocked: " + achievementId);
+        }
     }
 
     private void EndGame()
