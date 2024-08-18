@@ -177,8 +177,6 @@ GameObject:
   - component: {fileID: 487532}
   - component: {fileID: 5475594}
   - component: {fileID: 11495930}
-  - component: {fileID: 3718754556655349178}
-  - component: {fileID: 2421388132106806740}
   m_Layer: 8
   m_Name: M3_E36
   m_TagString: Player
@@ -402,11 +400,11 @@ MonoBehaviour:
   engineClipHighOff: {fileID: 8300000, guid: dd31934351e19ce49a9953b1e10de387, type: 3}
   engineClipMedOff: {fileID: 8300000, guid: e36a638ec1a8cb641840c735ffd4750b, type: 3}
   engineClipLowOff: {fileID: 8300000, guid: 9cc20a291fb4d3e44ad9684aa575e0a4, type: 3}
-  minEngineSoundPitch: 0.65
-  maxEngineSoundPitch: 1.65
+  minEngineSoundPitch: 0.45
+  maxEngineSoundPitch: 1
   minEngineSoundVolume: 0.05
-  maxEngineSoundVolume: 0.5
-  idleEngineSoundVolume: 0.5
+  maxEngineSoundVolume: 0.4
+  idleEngineSoundVolume: 0.2
   engineSoundPosition: {x: 0, y: 0, z: 1.5}
   gearSoundPosition: {x: 0, y: -0.5, z: 0.5}
   turboSoundPosition: {x: 0, y: 0, z: 1.5}
@@ -477,30 +475,6 @@ MonoBehaviour:
   useNOS: 1
   useTurbo: 1
   attachedTrailer: {fileID: 0}
---- !u!114 &3718754556655349178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 102514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abbc7ac612677454095748463fd6d533, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2421388132106806740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 102514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abbc7ac612677454095748463fd6d533, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &103758
 GameObject:
   m_ObjectHideFlags: 0

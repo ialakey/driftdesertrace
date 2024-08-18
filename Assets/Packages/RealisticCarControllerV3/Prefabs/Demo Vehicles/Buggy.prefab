@@ -13175,11 +13175,11 @@ MonoBehaviour:
   engineClipHighOff: {fileID: 8300000, guid: 1fed2aa14547dc54f9024e3dd893c8b7, type: 3}
   engineClipMedOff: {fileID: 8300000, guid: 112deeba15054fb4dacb1dcfdccddf65, type: 3}
   engineClipLowOff: {fileID: 8300000, guid: d5828333c2d65c94db10ad0bd4c82b02, type: 3}
-  minEngineSoundPitch: 0.75
-  maxEngineSoundPitch: 1.75
+  minEngineSoundPitch: 0.45
+  maxEngineSoundPitch: 1
   minEngineSoundVolume: 0.05
-  maxEngineSoundVolume: 0.5
-  idleEngineSoundVolume: 0.5
+  maxEngineSoundVolume: 0.4
+  idleEngineSoundVolume: 0.2
   engineSoundPosition: {x: 0, y: 0, z: 1.5}
   gearSoundPosition: {x: 0, y: -0.5, z: 0.5}
   turboSoundPosition: {x: 0, y: 0, z: 1.5}

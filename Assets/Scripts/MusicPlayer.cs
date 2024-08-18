@@ -19,6 +19,11 @@ public class MusicPlayer : MonoBehaviour
             track.LoadAudioData();
         }
 
+        for (int i = 0; i < tracks.Length; i++)
+        {
+            tracks[i] = AdjustVolume(tracks[i], 0.1f);
+        }
+
         if (tracks.Length > 0)
         {
             audioSource.clip = tracks[currentTrackIndex];
@@ -76,5 +81,21 @@ public class MusicPlayer : MonoBehaviour
             string shortenedTrackName = trackName.Substring(0, Mathf.Min(6, trackName.Length));
             trackInfoText.text = "N - next track. \n Now playing: " + shortenedTrackName;
         }
+    }
+
+    private AudioClip AdjustVolume(AudioClip clip, float volumeScale)
+    {
+        float[] samples = new float[clip.samples * clip.channels];
+        clip.GetData(samples, 0);
+
+        for (int i = 0; i < samples.Length; i++)
+        {
+            samples[i] *= volumeScale;
+        }
+
+        AudioClip newClip = AudioClip.Create(clip.name, clip.samples, clip.channels, clip.frequency, false);
+        newClip.SetData(samples, 0);
+
+        return newClip;
     }
 }
