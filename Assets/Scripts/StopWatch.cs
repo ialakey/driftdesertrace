@@ -93,5 +93,6 @@ public class Stopwatch : MonoBehaviour
     private void EndGame()
     {
         SceneManager.LoadScene("Menu");
+        UnlockAchievement("NEW_ACHIEVEMENT_SECRET");
     }
 }
