@@ -94,5 +94,6 @@ public class Stopwatch : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
         UnlockAchievement("NEW_ACHIEVEMENT_SECRET");
+        UnlockAchievement("NEW_ACHIEVEMENT_SECRET_2");
     }
 }
