@@ -21,7 +21,7 @@ public class MusicPlayer : MonoBehaviour
 
         for (int i = 0; i < tracks.Length; i++)
         {
-            tracks[i] = AdjustVolume(tracks[i], 0.1f);
+            tracks[i] = AdjustVolume(tracks[i], 0.15f);
         }
 
         if (tracks.Length > 0)
