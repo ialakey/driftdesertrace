@@ -1,6 +1,6 @@
 # Drift Desert Racing
 
-![Drift Desert Racing Banner](https://github.com/user-attachments/assets/2f38ea64-7095-4bd2-8dea-745f9b7330b3)
+![Icon](https://github.com/user-attachments/assets/288c6e18-2938-47bb-9aaa-2ca69d3c0168)
 
 **Drift Desert Racing** - A wild and chaotic game where you will embark on an 8-hour non-stop journey across an endless desert, all to discover the answer to the ultimate question: "What is the meaning of life?" Prepare for epic races across sandy dunes, drifting through narrow canyons, and challenges that will push your skills to the limit. Are you ready to take on the desert and uncover its deepest secrets?
 
